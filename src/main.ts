@@ -1,8 +1,8 @@
+import type {JWKInterface} from 'arweave/node/lib/wallet'
+import {checkFileExists, OutputType} from './utils'
 import * as core from '@actions/core'
 import {archiveUrl} from './archive'
 import fsPromises from 'fs/promises'
-import {checkFileExists, OutputType} from './utils'
-import {JWKInterface} from 'arbundles'
 
 async function run(): Promise<void> {
   try {

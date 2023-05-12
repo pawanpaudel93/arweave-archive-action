@@ -1,9 +1,10 @@
 import {SignatureOptions} from 'arweave/node/lib/crypto/crypto-interface'
-import {createData, ArweaveSigner, JWKInterface, DataItem} from 'arbundles'
+import {createData, ArweaveSigner, DataItem} from 'arbundles'
+import type {JWKInterface} from 'arweave/node/lib/wallet'
 import Transaction from 'arweave/node/lib/transaction'
+import {createHash, randomBytes} from 'crypto'
 import {findChrome} from 'find-chrome-bin'
 import fsPromises from 'fs/promises'
-import {createHash, randomBytes} from 'crypto'
 import Arweave from 'arweave'
 import axios from 'axios'
 import fs from 'fs'
@@ -76,20 +77,20 @@ async function signTransaction(
   tx: Transaction,
   jwk: JWKInterface,
   options?: SignatureOptions
-) {
+): Promise<Transaction> {
   // todo test balance
   const verifyTarget = tx.quantity && +tx.quantity > 0 && tx.target
   const targetVerificationFailure = verifyTarget
   const owner = jwk.n
   if (owner && tx.owner && tx.owner !== owner) {
-    throw 'Wrong owner'
+    throw Error('Wrong owner')
   }
   if (!tx.owner && owner) {
     tx.setOwner(owner)
   }
   await arweave.transactions.sign(tx, jwk, options)
   if (targetVerificationFailure) {
-    throw 'The target is a transaction hash, not an account'
+    throw Error('The target is a transaction hash, not an account')
   }
   return tx
 }
@@ -105,7 +106,7 @@ async function createDataItem(
   return dataItem
 }
 
-async function manageUpload(tx: Transaction) {
+async function manageUpload(tx: Transaction): Promise<number | undefined> {
   if (!tx.chunks?.chunks?.length) {
     arweave.transactions.post(tx)
     return
@@ -119,7 +120,10 @@ async function manageUpload(tx: Transaction) {
   return uploader.lastResponseStatus
 }
 
-export async function dispatch(tx: Transaction, jwk: JWKInterface) {
+export async function dispatch(
+  tx: Transaction,
+  jwk: JWKInterface
+): Promise<{id: string; type: string}> {
   const txObject = new Transaction(tx)
   if (!txObject.quantity || txObject.quantity === '0') {
     try {
@@ -143,7 +147,9 @@ export async function dispatch(tx: Transaction, jwk: JWKInterface) {
         const dispatchResult = {id: bundleTx.id, type: 'BUNDLED'}
         return dispatchResult
       }
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
   try {
     await signTransaction(txObject, jwk)
@@ -151,9 +157,9 @@ export async function dispatch(tx: Transaction, jwk: JWKInterface) {
     const dispatchResult = {id: txObject.id, type: 'BASE'}
     return dispatchResult
   } catch (e) {
-    console.error(e)
+    //
   }
-  throw 'error'
+  throw Error('error')
 }
 
 export async function readFileAsBuffer(filePath: string): Promise<Buffer> {

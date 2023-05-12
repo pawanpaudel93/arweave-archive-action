@@ -1,7 +1,7 @@
 import {APP_NAME, APP_VERSION, MANIFEST_CONTENT_TYPE} from './constants'
+import type {JWKInterface} from 'arweave/node/lib/wallet'
 import {execFile} from 'promisify-child-process'
 import fsPromises from 'node:fs/promises'
-import {JWKInterface} from 'arbundles'
 import {directory} from 'tempy'
 import mime from 'mime-types'
 import path from 'path'

@@ -27,7 +27,7 @@ jobs:
           chrome-version: stable
       - run: npm install https://github.com/pawanpaudel93/single-file-cli
       - name: Capture webpage and screenshot
-        uses: pawanpaudel93/arweave-archive-action@v0.1
+        uses: pawanpaudel93/arweave-archive-action@v0.1.0
         with:
           web3_token: ${{ secrets.WEB3_TOKEN }}
           url_file_path: 'urls.txt'
