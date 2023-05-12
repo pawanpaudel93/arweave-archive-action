@@ -115,7 +115,7 @@ exports.archiveUrl = archiveUrl;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.APP_VERSION = exports.APP_NAME = exports.MANIFEST_CONTENT_TYPE = void 0;
 exports.MANIFEST_CONTENT_TYPE = 'application/x.arweave-manifest+json';
-exports.APP_NAME = 'Arweave-Capture';
+exports.APP_NAME = 'Arweave-Archive';
 exports.APP_VERSION = '0.1.0';
 
 

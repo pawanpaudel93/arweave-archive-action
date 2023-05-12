@@ -1,5 +1,5 @@
 <h1 align="center">arweave-archive-action</h1>
-<p align="center">Capture single page html and screenshot of websites and save to web3.storagem or moralis.</p>
+<p align="center">Archive single page html and screenshot of websites and save to Arweave.</p>
 
 <p align="center">
   <a href="https://github.com/pawanpaudel93/arweave-archive-action/actions"><img alt="arweave-archive-action status" src="https://github.com/pawanpaudel93/arweave-archive-action/workflows/arweave-archive-action/badge.svg"></a>
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.16.0
+          node-version: 16
       - run: |
           sudo apt-get update
           sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
@@ -26,7 +26,7 @@ jobs:
         with:
           chrome-version: stable
       - run: npm install https://github.com/pawanpaudel93/single-file-cli
-      - name: Capture webpage and screenshot
+      - name: Archive webpage and screenshot
         uses: pawanpaudel93/arweave-archive-action@v0.1.0
         with:
           jwk: ${{ secrets.JWK }}
