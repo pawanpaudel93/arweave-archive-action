@@ -1,0 +1,17 @@
+name: 'Arweave archive action'
+description: 'Save single page html and screenshot of url'
+author: 'pawanpaudel93'
+inputs:
+  jwk:
+    description: 'arweave JWK'
+    required: true
+  url_file_path:
+    description: 'file containing urls lines to capture'
+    required: true
+  output_file_path:
+    description: 'json file to save the results'
+    required: false
+    default: 'saved.json'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
