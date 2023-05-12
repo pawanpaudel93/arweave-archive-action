@@ -29,43 +29,27 @@ jobs:
       - name: Capture webpage and screenshot
         uses: pawanpaudel93/arweave-archive-action@v0.1.0
         with:
-          web3_token: ${{ secrets.WEB3_TOKEN }}
+          jwk: ${{ secrets.JWK }}
           url_file_path: 'urls.txt'
-          service: "moralis"
 ```
 
 ## Inputs
 
 ## Inputs
 
-### `web3_token`
+### `jwk`
 
-**Required** API token for web3.storage or moralis
+**Required** Arweave wallet JWK
 
 ### `url_file_path`
 
 **Required** File containing urls lines to capture.
-
-### `service`
-
-**Required** Service type either `web3.storage` or `moralis` to upload the captured webpage, screenshot and metadata.
-
-<details>
-  <summary>Show advanced options: <code>outout_file_path</code>,  <code>web3_api</code></summary>
 
 ### `output_file_path`
 
 _Default_ `saved.json`
 
 JSON file path to save the captured webpage information.
-
-### `web3_api`
-
-_Default_ `https://api.web3.storage`
-
-Useful for testing against staging deployments by setting to the api origin of your choice.
-
-</details>
 
 ## Outputs
 
@@ -77,11 +61,11 @@ e.g.
 ```json
 [
   {
-    "title": "Web3 Storage - Simple file storage with IPFS & Filecoin",
-    "url": "https://web3.storage",
-    "cid": "bafybeiahtmydckvwwdjndstih5mmxdx2qixdcboki5i3fqzw7a2nwwmkx4",
-    "w3link": "https://w3s.link/ipfs/bafybeiahtmydckvwwdjndstih5mmxdx2qixdcboki5i3fqzw7a2nwwmkx4",
-    "timestamp": "Wed Sep 21 2022 20:36:13 GMT+0000 (Coordinated Universal Time)"
+    "title": "Arweave - A community-driven ecosystem",
+    "url": "https://arweave.org/",
+    "manifestID": "WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM",
+    "permalink": "https://arweave.net/WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM",
+    "timestamp": "Fri May 12 2023 23:11:33 GMT+0545 (Nepal Time)"
   }
 ]
 ```
@@ -100,4 +84,4 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 Give a ⭐️ if this project helped you!
 
-Copyright © 2022 [Pawan Paudel](https://github.com/pawanpaudel93).<br />
+Copyright © 2023 [Pawan Paudel](https://github.com/pawanpaudel93).<br />
