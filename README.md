@@ -27,7 +27,7 @@ jobs:
           chrome-version: stable
       - run: npm install https://github.com/pawanpaudel93/single-file-cli
       - name: Archive webpage and screenshot
-        uses: pawanpaudel93/arweave-archive-action@v0.1.0
+        uses: pawanpaudel93/arweave-archive-action@v1.0.0
         with:
           jwk: ${{ secrets.JWK }}
           url_file_path: 'urls.txt'
