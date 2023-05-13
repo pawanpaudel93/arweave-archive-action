@@ -31,6 +31,7 @@
     "axios": "^1.4.0",
     "find-chrome-bin": "^1.0.5",
     "mime-types": "^2.1.35",
+    "node-fetch": "^3.3.1",
     "promisify-child-process": "^4.1.1",
     "tempy": "^1.0.1"
   },

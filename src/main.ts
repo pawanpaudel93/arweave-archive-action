@@ -3,6 +3,9 @@ import {checkFileExists, OutputType} from './utils'
 import * as core from '@actions/core'
 import {archiveUrl} from './archive'
 import fsPromises from 'fs/promises'
+import {Headers} from 'node-fetch'
+
+global.Headers = Headers
 
 async function run(): Promise<void> {
   try {
