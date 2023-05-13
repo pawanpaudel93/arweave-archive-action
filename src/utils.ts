@@ -4,7 +4,7 @@ import type {JWKInterface} from 'arweave/node/lib/wallet'
 import Transaction from 'arweave/node/lib/transaction'
 import {createHash, randomBytes} from 'crypto'
 import {findChrome} from 'find-chrome-bin'
-import fsPromises from 'fs/promises'
+import fsPromises from 'node:fs/promises'
 import Arweave from 'arweave'
 import axios from 'axios'
 import fs from 'fs'
@@ -16,14 +16,15 @@ export type ReturnType = {
   message: string
   manifestID: string
   title: string
+  timestamp: number
 }
 
 export type OutputType = {
   title: string
-  manifestID: string
-  permalink: string
+  webpage: string
+  screenshot: string
   url: string
-  timestamp: string
+  timestamp: number
 }
 
 type Tag = {name: string; value: string; key?: string}

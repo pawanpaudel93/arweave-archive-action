@@ -48,39 +48,13 @@ export const archiveUrl = async (
       status: 'error',
       message: stderr.toString(),
       manifestID: '',
-      title: ''
+      title: '',
+      timestamp: 0
     }
   }
 
   // Get a list of all files in the directory
   const files = fs.readdirSync(tempDirectory)
-
-  // Loop through all files and read them as Uint8Array
-  await Promise.all(
-    files
-      .filter(file => !file.includes('metadata.json'))
-      .map(async file => {
-        const filePath = path.join(tempDirectory, file)
-        const data = await readFileAsBuffer(filePath)
-        const transaction = await arweave.createTransaction({
-          data: new Uint8Array(data)
-        })
-        const mimeType = mime.lookup(filePath) || 'application/octet-stream'
-        const hash = await toHash(data)
-        transaction.addTag('App-Name', APP_NAME)
-        transaction.addTag('App-Version', APP_VERSION)
-        transaction.addTag('Content-Type', mimeType)
-        transaction.addTag('File-Hash', hash)
-        const response = await dispatch(transaction, jwk)
-        manifestFile.paths[
-          (filePath.split('/').pop() as string) === 'index.html'
-            ? 'index.html'
-            : 'screenshot'
-        ] = {
-          id: response.id
-        }
-      })
-  )
 
   const metadata: {
     title: string
@@ -90,17 +64,54 @@ export const archiveUrl = async (
       await readFileAsBuffer(path.join(tempDirectory, 'metadata.json'))
     ).toString()
   )
+  const timestamp = Math.floor(Date.now() / 1000)
+
+  // Loop through all files and read them as Uint8Array
+  await Promise.all(
+    files
+      .filter(file => !file.includes('metadata.json'))
+      .map(async file => {
+        const filePath = path.join(tempDirectory, file)
+        const isIndexFile = filePath.includes('index.html')
+        const data = await readFileAsBuffer(filePath)
+        const transaction = await arweave.createTransaction({
+          data: new Uint8Array(data)
+        })
+        const mimeType = mime.lookup(filePath) || 'application/octet-stream'
+        const hash = await toHash(data)
+        transaction.addTag('App-Name', APP_NAME)
+        transaction.addTag('App-Version', APP_VERSION)
+        transaction.addTag('Content-Type', mimeType)
+        transaction.addTag(
+          isIndexFile ? 'page:title' : 'screenshot:title',
+          metadata.title
+        )
+        transaction.addTag(
+          isIndexFile ? 'page:url' : 'screenshot:url',
+          metadata.url
+        )
+        transaction.addTag(
+          isIndexFile ? 'page:timestamp' : 'screenshot:timestamp',
+          String(timestamp)
+        )
+        transaction.addTag('File-Hash', hash)
+        const response = await dispatch(transaction, jwk)
+        manifestFile.paths[isIndexFile ? 'index.html' : 'screenshot'] = {
+          id: response.id
+        }
+      })
+  )
 
   const manifestTransaction = await arweave.createTransaction({
     data: JSON.stringify(manifestFile)
   })
-  const unixTimestamp = Math.floor(Date.now() / 1000)
   manifestTransaction.addTag('App-Name', APP_NAME)
   manifestTransaction.addTag('App-Version', APP_VERSION)
   manifestTransaction.addTag('Content-Type', MANIFEST_CONTENT_TYPE)
-  manifestTransaction.addTag('page:title', metadata.title)
-  manifestTransaction.addTag('page:url', metadata.url)
-  manifestTransaction.addTag('page:timestamp', String(unixTimestamp))
+  manifestTransaction.addTag('Title', metadata.title)
+  manifestTransaction.addTag('Type', 'archive')
+  manifestTransaction.addTag('Url', metadata.url)
+  manifestTransaction.addTag('Timestamp', String(timestamp))
   const response = await dispatch(manifestTransaction, jwk)
 
   await fsPromises.rm(tempDirectory, {recursive: true, force: true})
@@ -108,6 +119,7 @@ export const archiveUrl = async (
     status: 'success',
     message: `Uploaded to Arweave!`,
     manifestID: response.id,
-    title: metadata.title
+    title: metadata.title,
+    timestamp
   }
 }

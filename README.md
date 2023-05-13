@@ -35,8 +35,6 @@ jobs:
 
 ## Inputs
 
-## Inputs
-
 ### `jwk`
 
 **Required** Arweave wallet JWK
@@ -63,9 +61,9 @@ e.g.
   {
     "title": "Arweave - A community-driven ecosystem",
     "url": "https://arweave.org/",
-    "manifestID": "WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM",
-    "permalink": "https://arweave.net/WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM",
-    "timestamp": "Fri May 12 2023 23:11:33 GMT+0545 (Nepal Time)"
+    "webpage": "https://arweave.net/WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM",
+    "screenshot": "https://arweave.net/WlG3iz__TfzMswJEQTHEqpMROIxuBAoaNG7owfhqwNM/screenshot",
+    "timestamp": 1683967277
   }
 ]
 ```

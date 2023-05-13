@@ -3,9 +3,7 @@ import {checkFileExists, OutputType} from './utils'
 import * as core from '@actions/core'
 import {archiveUrl} from './archive'
 import fsPromises from 'fs/promises'
-import {Headers} from 'node-fetch'
-
-global.Headers = Headers
+import 'cross-fetch/polyfill'
 
 async function run(): Promise<void> {
   try {
@@ -19,16 +17,16 @@ async function run(): Promise<void> {
       .split('\n')
     for (let url of urls) {
       url = url.trim()
-      const {manifestID, title} = await archiveUrl(
+      const {manifestID, title, timestamp} = await archiveUrl(
         JSON.parse(jwk) as JWKInterface,
         url
       )
       output.push({
         title,
         url,
-        manifestID,
-        permalink: `https://arweave.net/${manifestID}`,
-        timestamp: new Date().toString()
+        webpage: `https://arweave.net/${manifestID}`,
+        screenshot: `https://arweave.net/${manifestID}/screenshot`,
+        timestamp
       })
     }
     const outputToSave = JSON.stringify(output, null, 2)
