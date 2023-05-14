@@ -56,7 +56,7 @@
     "release-it": "^15.10.3",
     "single-file-cli": "https://github.com/pawanpaudel93/single-file-cli.git",
     "ts-jest": "^29.0.1",
-    "typescript": "^4.4.4"
+    "typescript": "^5.0.4"
   },
   "release-it": {
     "git": {
