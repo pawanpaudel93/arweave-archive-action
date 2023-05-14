@@ -46,8 +46,7 @@ const archiveUrl = (jwk, url) => __awaiter(void 0, void 0, void 0, function* () 
         `--browser-args='${BROWSER_ARGS}'`,
         url,
         `--output=${path_1.default.resolve(tempDirectory, 'index.html')}`,
-        `--base-path=${tempDirectory}`,
-        `--localhost=${!!process.env.LOCALHOST}`
+        `--base-path=${tempDirectory}`
     ];
     const { stderr } = yield (0, promisify_child_process_1.execFile)(SINGLEFILE_EXECUTABLE, command);
     if (stderr) {
@@ -223,6 +222,29 @@ run();
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -242,8 +264,10 @@ const transaction_1 = __importDefault(__nccwpck_require__(1373));
 const crypto_1 = __nccwpck_require__(6113);
 const find_chrome_bin_1 = __nccwpck_require__(9865);
 const promises_1 = __importDefault(__nccwpck_require__(3977));
+const core = __importStar(__nccwpck_require__(2186));
 const arweave_1 = __importDefault(__nccwpck_require__(7136));
 const axios_1 = __importDefault(__nccwpck_require__(8757));
+const path_1 = __importDefault(__nccwpck_require__(1017));
 const fs_1 = __importDefault(__nccwpck_require__(7147));
 let arweave;
 function checkFileExists(file) {
@@ -268,8 +292,10 @@ exports.getBin = getBin;
 function initArweave() {
     if (arweave)
         return arweave;
+    const host = new URL(core.getInput('gateway_url') || 'https://arweave.net')
+        .host;
     arweave = arweave_1.default.init({
-        host: 'arweave.net',
+        host,
         port: 443,
         protocol: 'https'
     });
@@ -308,7 +334,7 @@ function manageUpload(tx) {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         if (!((_b = (_a = tx.chunks) === null || _a === void 0 ? void 0 : _a.chunks) === null || _b === void 0 ? void 0 : _b.length)) {
-            arweave.transactions.post(tx);
+            yield arweave.transactions.post(tx);
             return;
         }
         const uploader = yield arweave.transactions.getUploader(tx);
@@ -331,7 +357,9 @@ function dispatch(tx, jwk) {
                 const target = txObject.target;
                 const signer = new arbundles_1.ArweaveSigner(jwk);
                 const bundleTx = yield createDataItem({ data, tags, target }, signer);
-                const res = yield axios_1.default.post('https://node2.bundlr.network/tx', bundleTx.getRaw(), {
+                const bundlerUrl = core.getInput('bundler_url') || 'https://node2.bundlr.network';
+                const txUrl = new URL(path_1.default.join(bundlerUrl, 'tx')).toString();
+                const res = yield axios_1.default.post(txUrl, bundleTx.getRaw(), {
                     headers: { 'Content-Type': 'application/octet-stream' },
                     maxBodyLength: Infinity
                 });

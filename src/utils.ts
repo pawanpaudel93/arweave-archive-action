@@ -5,8 +5,10 @@ import Transaction from 'arweave/node/lib/transaction'
 import {createHash, randomBytes} from 'crypto'
 import {findChrome} from 'find-chrome-bin'
 import fsPromises from 'node:fs/promises'
+import * as core from '@actions/core'
 import Arweave from 'arweave'
 import axios from 'axios'
+import path from 'path'
 import fs from 'fs'
 
 let arweave: Arweave
@@ -66,8 +68,10 @@ export async function getBin(): Promise<string> {
 
 export function initArweave(): Arweave {
   if (arweave) return arweave
+  const host = new URL(core.getInput('gateway_url') || 'https://arweave.net')
+    .host
   arweave = Arweave.init({
-    host: 'arweave.net',
+    host,
     port: 443,
     protocol: 'https'
   })
@@ -109,7 +113,7 @@ async function createDataItem(
 
 async function manageUpload(tx: Transaction): Promise<number | undefined> {
   if (!tx.chunks?.chunks?.length) {
-    arweave.transactions.post(tx)
+    await arweave.transactions.post(tx)
     return
   }
   const uploader = await arweave.transactions.getUploader(tx)
@@ -136,14 +140,13 @@ export async function dispatch(
       const target = txObject.target
       const signer = new ArweaveSigner(jwk)
       const bundleTx = await createDataItem({data, tags, target}, signer)
-      const res = await axios.post(
-        'https://node2.bundlr.network/tx',
-        bundleTx.getRaw(),
-        {
-          headers: {'Content-Type': 'application/octet-stream'},
-          maxBodyLength: Infinity
-        }
-      )
+      const bundlerUrl =
+        core.getInput('bundler_url') || 'https://node2.bundlr.network'
+      const txUrl = new URL(path.join(bundlerUrl, 'tx')).toString()
+      const res = await axios.post(txUrl, bundleTx.getRaw(), {
+        headers: {'Content-Type': 'application/octet-stream'},
+        maxBodyLength: Infinity
+      })
       if (res.status >= 200 && res.status < 300) {
         const dispatchResult = {id: bundleTx.id, type: 'BUNDLED'}
         return dispatchResult

@@ -1,15 +1,23 @@
 name: 'Arweave archive action'
-description: 'Save single page html and screenshot of url'
+description: 'Archive page html and screenshot of url'
 author: 'pawanpaudel93'
 inputs:
   jwk:
-    description: 'arweave JWK'
+    description: 'Arweave wallet JWK'
     required: true
   url_file_path:
-    description: 'file containing urls lines to capture'
+    description: 'File containing urls lines to capture'
     required: true
+  gateway_url:
+    description: 'URL of the service used to access network data'
+    required: false
+    default: 'https://arweave.net'
+  bundler_url:
+    description: 'URL of the service used to submit data to the network when possible instead of using the gateway'
+    required: false
+    default: 'https://node2.bundlr.network'
   output_file_path:
-    description: 'json file to save the results'
+    description: 'JSON file to save the results'
     required: false
     default: 'saved.json'
 runs:

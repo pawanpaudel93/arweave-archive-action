@@ -39,8 +39,7 @@ export const archiveUrl = async (
     `--browser-args='${BROWSER_ARGS}'`,
     url,
     `--output=${path.resolve(tempDirectory, 'index.html')}`,
-    `--base-path=${tempDirectory}`,
-    `--localhost=${!!process.env.LOCALHOST}`
+    `--base-path=${tempDirectory}`
   ]
   const {stderr} = await execFile(SINGLEFILE_EXECUTABLE, command)
   if (stderr) {

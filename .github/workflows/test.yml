@@ -22,3 +22,4 @@ jobs:
         with:
           jwk: ${{ secrets.JWK }}
           url_file_path: 'urls.txt'
+          gateway_url: 'https://ar-io.net'

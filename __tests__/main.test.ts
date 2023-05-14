@@ -6,7 +6,7 @@ import fs from 'fs'
 
 // shows how the runner will run a javascript action with env / stdout protocol
 test('test runs', () => {
-  process.env.LOCALHOST = 'true'
+  process.env.DEVELOPMENT = 'true'
   process.env.INPUT_JWK = fs
     .readFileSync(path.join(__dirname, '..', 'jwk.json'))
     .toString()
