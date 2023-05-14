@@ -1,5 +1,5 @@
 import type {JWKInterface} from 'arweave/node/lib/wallet'
-import {checkFileExists, OutputType} from './utils'
+import {checkFileExists, OutputType, getGatewayUrl, joinUrl} from './utils'
 import * as core from '@actions/core'
 import {archiveUrl} from './archive'
 import fsPromises from 'fs/promises'
@@ -7,6 +7,7 @@ import 'cross-fetch/polyfill'
 
 async function run(): Promise<void> {
   try {
+    const gatewayUrl = getGatewayUrl()
     const jwk = core.getInput('jwk')
     const url_path = core.getInput('url_file_path')
     const output_path = core.getInput('output_file_path') || 'saved.json'
@@ -24,8 +25,8 @@ async function run(): Promise<void> {
       output.push({
         title,
         url,
-        webpage: `https://arweave.net/${manifestID}`,
-        screenshot: `https://arweave.net/${manifestID}/screenshot`,
+        webpage: joinUrl(gatewayUrl, manifestID),
+        screenshot: joinUrl(gatewayUrl, `${manifestID}/screenshot`),
         timestamp
       })
     }

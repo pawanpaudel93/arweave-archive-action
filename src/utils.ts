@@ -8,7 +8,6 @@ import fsPromises from 'node:fs/promises'
 import * as core from '@actions/core'
 import Arweave from 'arweave'
 import axios from 'axios'
-import path from 'path'
 import fs from 'fs'
 
 let arweave: Arweave
@@ -68,8 +67,7 @@ export async function getBin(): Promise<string> {
 
 export function initArweave(): Arweave {
   if (arweave) return arweave
-  const host = new URL(core.getInput('gateway_url') || 'https://arweave.net')
-    .host
+  const host = new URL(getGatewayUrl()).host
   arweave = Arweave.init({
     host,
     port: 443,
@@ -140,9 +138,8 @@ export async function dispatch(
       const target = txObject.target
       const signer = new ArweaveSigner(jwk)
       const bundleTx = await createDataItem({data, tags, target}, signer)
-      const bundlerUrl =
-        core.getInput('bundler_url') || 'https://node2.bundlr.network'
-      const txUrl = new URL(path.join(bundlerUrl, 'tx')).toString()
+      const bundlerUrl = getBundlerUrl()
+      const txUrl = joinUrl(bundlerUrl, 'tx')
       const res = await axios.post(txUrl, bundleTx.getRaw(), {
         headers: {'Content-Type': 'application/octet-stream'},
         maxBodyLength: Infinity
@@ -178,4 +175,16 @@ export async function toHash(data: Buffer): Promise<string> {
   const hashHex = hashBuffer.toString('hex')
 
   return hashHex
+}
+
+export function getGatewayUrl(): string {
+  return core.getInput('gateway_url') || 'https://arweave.net'
+}
+
+export function getBundlerUrl(): string {
+  return core.getInput('bundler_url') || 'https://node2.bundlr.network'
+}
+
+export function joinUrl(baseUrl: string, pathUrl: string): string {
+  return new URL(pathUrl, baseUrl).toString()
 }
