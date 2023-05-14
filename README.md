@@ -31,6 +31,7 @@ jobs:
         with:
           jwk: ${{ secrets.JWK }}
           url_file_path: 'urls.txt'
+          gateway_url: 'https://ar-io.net'
 ```
 
 ## Inputs
@@ -48,6 +49,18 @@ jobs:
 _Default_ `saved.json`
 
 JSON file path to save the captured webpage information.
+
+### `gateway_url`
+
+_Default_ `https://arweave.net`
+
+URL of the service used to access network data.
+
+### `bundler_url`
+
+_Default_ `https://node2.bundlr.network`
+
+URL of the service used to submit data to the network when possible instead of using the gateway.
 
 ## Outputs
 
