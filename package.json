@@ -34,7 +34,7 @@
     "find-chrome-bin": "^1.0.5",
     "mime-types": "^2.1.35",
     "promisify-child-process": "^4.1.1",
-    "tempy": "^1.0.1"
+    "tempy": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.3",
