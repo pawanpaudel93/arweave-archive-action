@@ -28,7 +28,8 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "arweave-archive": "^0.0.1",
-    "cross-fetch": "^3.1.5"
+    "cross-fetch": "^3.1.5",
+    "single-file-cli": "git+https://github.com/pawanpaudel93/single-file-cli.git"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.3",
@@ -47,7 +48,6 @@
     "js-yaml": "^4.1.0",
     "prettier": "2.7.1",
     "release-it": "^15.10.3",
-    "single-file-cli": "https://github.com/pawanpaudel93/single-file-cli.git",
     "ts-jest": "^29.0.1",
     "typescript": "^4.4.4"
   },

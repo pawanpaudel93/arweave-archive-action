@@ -28,7 +28,10 @@ async function run(): Promise<void> {
     const archive = new Archive(JSON.parse(jwk), gatewayUrl, bundlerUrl)
     for (let url of urls) {
       url = url.trim()
-      const {txID, title, timestamp} = await archive.archiveUrl(url)
+      const {status, message, txID, title, timestamp} =
+        await archive.archiveUrl(url)
+      core.info(status)
+      core.info(message)
       output.push({
         title,
         url,

@@ -6339,6 +6339,20 @@ signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
+"single-file-cli@git+https://github.com/pawanpaudel93/single-file-cli.git":
+  version "1.0.21"
+  uid "75aaa0ebddd55abddaa5051cd86f96025bb249c5"
+  resolved "git+https://github.com/pawanpaudel93/single-file-cli.git#75aaa0ebddd55abddaa5051cd86f96025bb249c5"
+  dependencies:
+    file-url "3.0.0"
+    iconv-lite "0.6.3"
+    jsdom "20.0.1"
+    puppeteer-core "19.0.0"
+    selenium-webdriver "4.5.0"
+    single-file-core "1.0.25"
+    strong-data-uri "1.0.6"
+    yargs "17.6.0"
+
 "single-file-cli@https://github.com/pawanpaudel93/single-file-cli.git":
   version "1.0.21"
   resolved "https://github.com/pawanpaudel93/single-file-cli.git#75aaa0ebddd55abddaa5051cd86f96025bb249c5"

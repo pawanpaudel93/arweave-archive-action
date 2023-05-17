@@ -63,7 +63,9 @@ function run() {
             const archive = new arweave_archive_1.Archive(JSON.parse(jwk), gatewayUrl, bundlerUrl);
             for (let url of urls) {
                 url = url.trim();
-                const { txID, title, timestamp } = yield archive.archiveUrl(url);
+                const { status, message, txID, title, timestamp } = yield archive.archiveUrl(url);
+                core.info(status);
+                core.info(message);
                 output.push({
                     title,
                     url,
