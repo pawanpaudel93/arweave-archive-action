@@ -27,24 +27,17 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "arbundles": "^0.9.5",
-    "arweave": "^1.13.7",
-    "axios": "^1.4.0",
-    "cross-fetch": "^3.1.5",
-    "find-chrome-bin": "^1.0.5",
-    "mime-types": "^2.1.35",
-    "promisify-child-process": "^4.1.1",
-    "tempy": "^1.0.1"
+    "arweave-archive": "^0.0.1",
+    "cross-fetch": "^3.1.5"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.3",
     "@release-it/conventional-changelog": "^5.1.1",
-    "@types/glob": "^8.0.0",
-    "@types/mime-types": "^2.1.1",
+    "@types/jest": "^29.5.1",
     "@types/node": "^18.7.18",
-    "@types/which": "^2.0.1",
     "@typescript-eslint/parser": "^5.8.1",
     "@vercel/ncc": "^0.34.0",
+    "arweave": "^1.13.7",
     "eslint": "^8.23.1",
     "eslint-plugin-github": "^4.3.2",
     "eslint-plugin-jest": "^27.0.4",

@@ -1,13 +1,22 @@
-import type {JWKInterface} from 'arweave/node/lib/wallet'
-import {checkFileExists, OutputType, getGatewayUrl, joinUrl} from './utils'
 import * as core from '@actions/core'
-import {archiveUrl} from './archive'
-import fsPromises from 'fs/promises'
+import {Archive} from 'arweave-archive'
 import 'cross-fetch/polyfill'
+
+import fsPromises from 'node:fs/promises'
+import fs from 'fs'
+
+export type OutputType = {
+  title: string
+  webpage: string
+  screenshot: string
+  url: string
+  timestamp: number
+}
 
 async function run(): Promise<void> {
   try {
     const gatewayUrl = getGatewayUrl()
+    const bundlerUrl = getBundlerUrl()
     const jwk = core.getInput('jwk')
     const url_path = core.getInput('url_file_path')
     const output_path = core.getInput('output_file_path') || 'saved.json'
@@ -16,17 +25,15 @@ async function run(): Promise<void> {
       .toString()
       .trim()
       .split('\n')
+    const archive = new Archive(JSON.parse(jwk), gatewayUrl, bundlerUrl)
     for (let url of urls) {
       url = url.trim()
-      const {manifestID, title, timestamp} = await archiveUrl(
-        JSON.parse(jwk) as JWKInterface,
-        url
-      )
+      const {txID, title, timestamp} = await archive.archiveUrl(url)
       output.push({
         title,
         url,
-        webpage: joinUrl(gatewayUrl, manifestID),
-        screenshot: joinUrl(gatewayUrl, `${manifestID}/screenshot`),
+        webpage: joinUrl(gatewayUrl, txID),
+        screenshot: joinUrl(gatewayUrl, `${txID}/screenshot`),
         timestamp
       })
     }
@@ -48,6 +55,27 @@ async function run(): Promise<void> {
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
+}
+
+async function checkFileExists(file: string): Promise<boolean> {
+  try {
+    await fsPromises.access(file, fs.constants.F_OK)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+function getGatewayUrl(): string {
+  return core.getInput('gateway_url') || 'https://arweave.net'
+}
+
+function getBundlerUrl(): string {
+  return core.getInput('bundler_url') || 'https://node2.bundlr.network'
+}
+
+function joinUrl(baseUrl: string, pathUrl: string): string {
+  return new URL(pathUrl, baseUrl).toString()
 }
 
 run()
