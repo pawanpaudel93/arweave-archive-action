@@ -1,5 +1,12 @@
 
 
+## [1.1.3](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.1...v1.1.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* add arweave-archive package and remove unused code ([ac8f641](https://github.com/pawanpaudel93/arweave-archive-action/commit/ac8f641329d142a8a9e5d5295ffd38865a709eec))
+
 ## [1.1.2](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.1...v1.1.2) (2023-05-17)
 
 
