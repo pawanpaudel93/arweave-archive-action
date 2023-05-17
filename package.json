@@ -1,6 +1,6 @@
 {
   "name": "arweave-archive-action",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "description": "Archive single page html and screenshot of webpage",
   "main": "lib/main.js",
@@ -27,9 +27,8 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "arweave-archive": "^0.0.1",
-    "cross-fetch": "^3.1.5",
-    "single-file-cli": "git+https://github.com/pawanpaudel93/single-file-cli.git"
+    "arweave-archive": "^0.0.2",
+    "cross-fetch": "^3.1.5"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.3",
