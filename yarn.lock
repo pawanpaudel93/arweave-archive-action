@@ -1635,10 +1635,10 @@ arrify@^1.0.1:
   resolved "https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==
 
-arweave-archive@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/arweave-archive/-/arweave-archive-0.0.2.tgz#136c76934a6776311206b9f5e05fadbdb1bcea71"
-  integrity sha512-18h5+c/KnM1johhaqfoQ3Ss0xtG06jokc+tBnAWr4CWeomXUOkJU7Fm95ep0+cZvU0C1vjiyg7ltV6QO6AxraA==
+arweave-archive@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/arweave-archive/-/arweave-archive-0.0.4.tgz#41ae3e9b6c13e8826c9d7107f70acc5357ec5a39"
+  integrity sha512-4vv3AhEzpfZotd2miriKBtM4aLb6w/qPZ1yc7/Lh7G6mT4fmVyu5zYtUa0HBsrhmNHuWoEZYx2tA6IxUq6uPBg==
   dependencies:
     arbundles "^0.9.6"
     arweave "^1.13.7"
@@ -6345,9 +6345,9 @@ signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-"single-file-cli@git+https://github.com/pawanpaudel93/single-file-cli.git":
+"single-file-cli@https://github.com/pawanpaudel93/single-file-cli.git":
   version "1.0.21"
-  resolved "git+https://github.com/pawanpaudel93/single-file-cli.git#75aaa0ebddd55abddaa5051cd86f96025bb249c5"
+  resolved "https://github.com/pawanpaudel93/single-file-cli.git#75aaa0ebddd55abddaa5051cd86f96025bb249c5"
   dependencies:
     file-url "3.0.0"
     iconv-lite "0.6.3"
