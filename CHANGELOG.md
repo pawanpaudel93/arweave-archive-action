@@ -1,5 +1,7 @@
 
 
+## [1.1.4](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.3...v1.1.4) (2023-05-19)
+
 ## [1.1.3](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.1...v1.1.3) (2023-05-17)
 
 
