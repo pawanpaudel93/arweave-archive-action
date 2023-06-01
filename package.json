@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "arweave-archive": "^0.0.4",
+    "arweave-archive": "^0.0.6",
     "cross-fetch": "^3.1.5"
   },
   "devDependencies": {
