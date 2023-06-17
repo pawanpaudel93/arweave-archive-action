@@ -26,29 +26,29 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.10.0",
     "arweave-archive": "^0.0.4",
-    "cross-fetch": "^3.1.5"
+    "cross-fetch": "^3.1.6"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.5",
     "@release-it/conventional-changelog": "^5.1.1",
-    "@types/jest": "^29.5.1",
-    "@types/node": "^18.7.18",
-    "@typescript-eslint/parser": "^5.8.1",
+    "@types/jest": "^29.5.2",
+    "@types/node": "^18.16.18",
+    "@typescript-eslint/parser": "^5.59.11",
     "@vercel/ncc": "^0.34.0",
     "arweave": "^1.13.7",
-    "eslint": "^8.23.1",
-    "eslint-plugin-github": "^4.3.2",
-    "eslint-plugin-jest": "^27.0.4",
+    "eslint": "^8.43.0",
+    "eslint-plugin-github": "^4.8.0",
+    "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
-    "jest": "^29.0.3",
+    "jest": "^29.5.0",
     "js-yaml": "^4.1.0",
     "prettier": "2.7.1",
-    "release-it": "^15.10.3",
-    "ts-jest": "^29.0.1",
-    "typescript": "^4.4.4"
+    "release-it": "^15.11.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^4.9.5"
   },
   "release-it": {
     "git": {
