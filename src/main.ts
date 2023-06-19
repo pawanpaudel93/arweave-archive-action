@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import {Archive} from 'arweave-archive'
+import {ArweaveArchiver} from 'arweave-archive'
 import 'cross-fetch/polyfill'
 
 import fsPromises from 'node:fs/promises'
@@ -25,17 +25,26 @@ async function run(): Promise<void> {
       .toString()
       .trim()
       .split('\n')
-    const archive = new Archive(JSON.parse(jwk), gatewayUrl, bundlerUrl)
+    const archive = new ArweaveArchiver(JSON.parse(jwk), {
+      gatewayUrl,
+      bundlerUrl
+    })
     for (let url of urls) {
       url = url.trim()
-      const {txID, title, timestamp} = await archive.archiveUrl(url)
-      output.push({
-        title,
-        url,
-        webpage: joinUrl(gatewayUrl, txID),
-        screenshot: joinUrl(gatewayUrl, `${txID}/screenshot`),
-        timestamp
-      })
+      const {txID, title, timestamp, status} = await archive.archiveUrl(url)
+      if (status === 'success') {
+        output.push({
+          title,
+          url,
+          webpage: joinUrl(gatewayUrl, txID),
+          screenshot: joinUrl(gatewayUrl, `${txID}/screenshot`),
+          timestamp
+        })
+      }
+    }
+    if (output.length === 0) {
+      core.setFailed('Archiving urls failed.')
+      return
     }
     const outputToSave = JSON.stringify(output, null, 2)
     if (!(await checkFileExists(output_path))) {
