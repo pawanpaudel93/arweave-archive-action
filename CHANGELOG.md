@@ -1,5 +1,12 @@
 
 
+## [1.1.5](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.3...v1.1.5) (2023-06-19)
+
+
+### Bug Fixes
+
+* update test workflow ([30918a0](https://github.com/pawanpaudel93/arweave-archive-action/commit/30918a0b62555c7215288f0b400facf9310a1cff))
+
 ## [1.1.4](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.3...v1.1.4) (2023-05-19)
 
 ## [1.1.3](https://github.com/pawanpaudel93/arweave-archive-action/compare/v1.1.1...v1.1.3) (2023-05-17)
