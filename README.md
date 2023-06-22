@@ -21,13 +21,8 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
-      - name: Install Google Chrome
-        uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: stable
-      - run: npm install https://github.com/pawanpaudel93/single-file-cli
       - name: Archive webpage and screenshot
-        uses: pawanpaudel93/arweave-archive-action@v1.1.5
+        uses: pawanpaudel93/arweave-archive-action@v1.1.6
         with:
           jwk: ${{ secrets.JWK }}
           url_file_path: 'urls.txt'
