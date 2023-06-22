@@ -31,7 +31,9 @@ async function run(): Promise<void> {
     })
     for (let url of urls) {
       url = url.trim()
-      const {txID, title, timestamp, status} = await archive.archiveUrl(url)
+      const {txID, title, timestamp, status, message} =
+        await archive.archiveUrl(url)
+      core.info(message)
       if (status === 'success') {
         output.push({
           title,
