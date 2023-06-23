@@ -1080,10 +1080,10 @@
   dependencies:
     "@octokit/openapi-types" "^18.0.0"
 
-"@pawanpaudel93/single-file@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@pawanpaudel93/single-file/-/single-file-1.0.4.tgz#c541e30ce7a1b3818eafdde5b9b880fec1e573ec"
-  integrity sha512-7YJmpAa/7DExqsoyoNYed/yaOGwb8B085qVZW1a+dMFPwz4X6kiqQErfmV4jUFbybUV0gs1s9620HXICUb1kOw==
+"@pawanpaudel93/single-file@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@pawanpaudel93/single-file/-/single-file-1.0.5.tgz#e7cd9330678c2fa135fbface9aad3c2ddab1e93c"
+  integrity sha512-WvTsJLaH/0AOI01UKveDj6xc3+jGAUiIj4eM2rNGvyNQhxWNaWIZdfLKnDODtpGW4D/mAitQ6dMqoFJJnpQZyw==
   dependencies:
     file-url "3.0.0"
     puppeteer-core "19.7.5"
@@ -1689,16 +1689,16 @@ arrify@^1.0.1:
   resolved "https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==
 
-arweave-archive@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.npmjs.org/arweave-archive/-/arweave-archive-0.0.14.tgz#409c67c86ed90830ed361495639b3dd4ba28027d"
-  integrity sha512-76HJ5lv/a6xUrqWvy7WnEf95jiGZHjd0iUZ26ldMePWlrQqYd7OVCn/p3RL+XCTvx160FhJBmQqKkyfonbaMBQ==
+arweave-archive@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/arweave-archive/-/arweave-archive-0.0.15.tgz#7722643ebe9364380023770fba7ede562d825fe5"
+  integrity sha512-plVTWgVYQBLAyo/K5qbRqEXzlIwEkftPuEzCBb5LImdOBVPuSWwRJHzMEAdN34znilLXr8rqhAsSeLVXlqghDw==
   dependencies:
     arbundles "^0.9.6"
     arweave "^1.13.7"
     axios "^1.4.0"
     mime-types "^2.1.35"
-    save-html-screenshot "^0.0.12"
+    save-html-screenshot "^0.0.13"
 
 arweave-stream-tx@^1.1.0:
   version "1.2.2"
@@ -6184,12 +6184,12 @@ safe-regex-test@^1.0.0:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-save-html-screenshot@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.npmjs.org/save-html-screenshot/-/save-html-screenshot-0.0.12.tgz#9966f8abc1458fd298c1be6899a92efe55652fd0"
-  integrity sha512-HfiBui7/1RyYUgYuTHjiBsHlmWVpCushHoRe08RW64WDg5Z6dhsLJQsULKKMlnRO3VWP1sNn4avOxrQU1RVywg==
+save-html-screenshot@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/save-html-screenshot/-/save-html-screenshot-0.0.13.tgz#29a97ea7a4aa341537668d44145b12aace018fee"
+  integrity sha512-71Ikr7IzO1+Y4Sz0NH1bgIPOV3yp98YnzC9+AyQKbub5S8dDMKgTSsn2aynY7hrrRtKRcI06dMCWp/++vVlx4A==
   dependencies:
-    "@pawanpaudel93/single-file" "^1.0.4"
+    "@pawanpaudel93/single-file" "^1.0.5"
     find-chrome-bin "^1.0.5"
     promisify-child-process "^4.1.1"
     puppeteer-core "19.7.5"
